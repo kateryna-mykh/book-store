@@ -109,8 +109,8 @@
 				</executions>
 				<configuration>
 					<sourceDirectories>
-						<sourceDirectory>${project.build.sourceDirectory}</sourceDirectory>
-						<sourceDirectory>${project.build.testSourceDirectory}</sourceDirectory>
+						<sourceDirectory>src/main/java</sourceDirectory>
+						<sourceDirectory>src/test/java</sourceDirectory>
 					</sourceDirectories>
 					<configLocation>${maven.checkstyle.plugin.configLocation}</configLocation>
 					<encoding>UTF-8</encoding>
