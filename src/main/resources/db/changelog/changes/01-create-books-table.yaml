@@ -27,8 +27,8 @@ databaseChangeLog:
                   name: isbn
                   type: varchar(255)
                   constraints:
-                     uniqe: true
                      nullable: false
+                     unique: true
             - column:
                   name: price
                   type: decimal(10,2)
