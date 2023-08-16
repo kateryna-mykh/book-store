@@ -29,12 +29,12 @@ public class CustomGlobalExceptionHandler extends ResponseEntityExceptionHandler
         body.put("timestamp", new Date());
         body.put("status", status.value());
         List<String> errors = ex.getBindingResult().getAllErrors().stream()
-                .map(e -> getErrorMeaasge(e)).toList();
+                .map(e -> getErrorMessage(e)).toList();
         body.put("errors", errors);
         return new ResponseEntity<>(body, headers, status);
     }
 
-    private String getErrorMeaasge(ObjectError e) {
+    private String getErrorMessage(ObjectError e) {
         if (e instanceof FieldError) {
             String field = ((FieldError) e).getField();
             String message = e.getDefaultMessage();
