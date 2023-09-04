@@ -38,15 +38,12 @@ public class UserServiceImpl implements UserService {
         }
         User user = userMapper.toModel(request);
         user.setPassword(passwordEncoder.encode(request.getPassword()));
-        setUserRoles(user);
-        return userMapper.toDto(userRepository.save(user));
-    }
-
-    private void setUserRoles(User user) {
         HashSet<Role> userRoles = new HashSet<>();
         userRoles.add(roleService.getRoleByRoleName(RoleName.USER));
         if (user.getEmail().equals(adminEmail)) {
             userRoles.add(roleService.getRoleByRoleName(RoleName.ADMIN));
         }
+        user.setRoles(userRoles);
+        return userMapper.toDto(userRepository.save(user));
     }
 }

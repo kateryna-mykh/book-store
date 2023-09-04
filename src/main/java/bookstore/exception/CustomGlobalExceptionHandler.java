@@ -60,7 +60,7 @@ public class CustomGlobalExceptionHandler extends ResponseEntityExceptionHandler
             RegistrationException registrationException) {
         Map<String, Object> body = new LinkedHashMap<>();
         body.put("timestamp", new Date());
-        body.put("status", HttpStatus.NOT_FOUND);
+        body.put("status", HttpStatus.FORBIDDEN);
         body.put("errors", registrationException.getMessage());
         return new ResponseEntity<>(body, HttpStatus.FORBIDDEN);
     }
