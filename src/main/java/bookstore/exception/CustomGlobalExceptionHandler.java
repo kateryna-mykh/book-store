@@ -53,7 +53,7 @@ public class CustomGlobalExceptionHandler extends ResponseEntityExceptionHandler
         body.put("errors", entityNotFoundException.getMessage());
         return new ResponseEntity<>(body, HttpStatus.NOT_FOUND);
     }
-    
+
     @ExceptionHandler(RegistrationException.class)
     @ResponseStatus(value = HttpStatus.FORBIDDEN)
     public ResponseEntity<Object> handleRegistrationException(

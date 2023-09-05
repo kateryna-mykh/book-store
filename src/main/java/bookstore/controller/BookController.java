@@ -37,14 +37,14 @@ public class BookController {
     public List<BookDto> getAll(@ParameterObject Pageable pageable) {
         return bookService.findAll(pageable);
     }
-  
+
     @PreAuthorize("hasAuthority('USER')")
     @GetMapping("/{id}")
     @Operation(summary = "Get the specific book", description = "Get the book by id")
     public BookDto getBookById(@PathVariable Long id) {
         return bookService.findById(id);
     }
-  
+
     @PreAuthorize("hasAuthority('ADMIN')")
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
