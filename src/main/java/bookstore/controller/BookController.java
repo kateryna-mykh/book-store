@@ -10,6 +10,7 @@ import java.util.List;
 import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,7 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @Tag(name = "Book management", description = "Endpoints for managing books")
 @RestController
-@RequestMapping("/api/books")
+@RequestMapping("/books")
 public class BookController {
     private final BookService bookService;
 
@@ -30,18 +31,21 @@ public class BookController {
         this.bookService = bookService;
     }
 
+    @PreAuthorize("hasAuthority('USER')")
     @GetMapping
     @Operation(summary = "Get all books", description = "Get all available books")
     public List<BookDto> getAll(@ParameterObject Pageable pageable) {
         return bookService.findAll(pageable);
     }
-  
+
+    @PreAuthorize("hasAuthority('USER')")
     @GetMapping("/{id}")
     @Operation(summary = "Get the specific book", description = "Get the book by id")
     public BookDto getBookById(@PathVariable Long id) {
         return bookService.findById(id);
     }
-  
+
+    @PreAuthorize("hasAuthority('ADMIN')")
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
     @Operation(summary = "Create a new book", description = "Create a new book")
@@ -49,12 +53,14 @@ public class BookController {
         return bookService.save(book);
     }
 
+    @PreAuthorize("hasAuthority('ADMIN')")
     @PutMapping("/{id}")
     @Operation(summary = "Update a book", description = "Update a book")
     public BookDto update(@PathVariable Long id, @RequestBody @Valid CreateBookRequestDto book) {
         return bookService.update(id, book);
     }
 
+    @PreAuthorize("hasAuthority('ADMIN')")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @DeleteMapping("/{id}")
     @Operation(summary = "Delete a book", description = "Delete a book by id")
