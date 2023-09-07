@@ -1,8 +1,9 @@
-package bookstore.service;
+package bookstore.service.impl;
 
 import bookstore.model.Role;
 import bookstore.model.Role.RoleName;
 import bookstore.repository.RoleRepository;
+import bookstore.service.RoleService;
 import org.springframework.stereotype.Service;
 
 @Service

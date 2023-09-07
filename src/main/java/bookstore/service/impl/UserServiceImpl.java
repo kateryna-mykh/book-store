@@ -1,4 +1,4 @@
-package bookstore.service;
+package bookstore.service.impl;
 
 import bookstore.dto.UserRegistrationRequestDto;
 import bookstore.dto.UserResponseDto;
@@ -8,6 +8,8 @@ import bookstore.model.Role;
 import bookstore.model.Role.RoleName;
 import bookstore.model.User;
 import bookstore.repository.UserRepository;
+import bookstore.service.RoleService;
+import bookstore.service.UserService;
 import java.util.HashSet;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.password.PasswordEncoder;
