@@ -9,6 +9,7 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
+import java.util.HashSet;
 import java.util.Set;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -32,6 +33,6 @@ public class ShoppingCart {
     @ToStringExclude
     @EqualsAndHashCode.Exclude
     @OneToMany(mappedBy = "shoppingCart", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<CartItem> cartItems;
+    private Set<CartItem> cartItems = new HashSet<>();
     private Boolean isDeleted = false;
 }
