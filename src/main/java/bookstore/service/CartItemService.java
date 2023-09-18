@@ -11,4 +11,6 @@ public interface CartItemService {
     void delete(Long cartItemId);
     
     CartItem update(CartItem cartItem);
+    
+    void deleteAllByShoppingCartId(Long cartId);
 }

@@ -5,6 +5,7 @@ import bookstore.dto.CartItemBookQty;
 import bookstore.dto.ShoppingCartDto;
 import bookstore.mapper.ShoppingCartMapper;
 import bookstore.model.CartItem;
+import bookstore.model.ShoppingCart;
 import bookstore.repository.ShoppingCartRepository;
 import bookstore.service.CartItemService;
 import bookstore.service.ShoppingCartService;
@@ -56,5 +57,11 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
     public ShoppingCartDto deleteBookFromCart(Long cartItemId) {
         cartItemService.delete(cartItemId);
         return getShoppingCart();
+    }
+    
+    @Override
+    public void clear() {
+        ShoppingCart userCart = userService.getUserCart();
+        cartItemService.deleteAllByShoppingCartId(userCart.getId());
     }
 }
