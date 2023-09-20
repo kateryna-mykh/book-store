@@ -18,7 +18,6 @@ public class CartItemServiceImpl implements CartItemService {
     private final CartItemRepository cartItemRepository;
     private final CartItemMapper cartItemMapper;
     private final BookRepository bookRepository;
-    private final ShoppingCartRepository shoppingCartRepository;
     private final UserService userService;
 
     public CartItemServiceImpl(CartItemRepository cartItemRepository, CartItemMapper cartItemMapper,
@@ -27,7 +26,6 @@ public class CartItemServiceImpl implements CartItemService {
         this.cartItemRepository = cartItemRepository;
         this.cartItemMapper = cartItemMapper;
         this.bookRepository = bookRepository;
-        this.shoppingCartRepository = shoppingCartRepository;
         this.userService = userService;
     }
 
@@ -58,5 +56,10 @@ public class CartItemServiceImpl implements CartItemService {
     @Override
     public CartItem update(CartItem cartItem) {
         return cartItemRepository.save(cartItem);
+    }
+    
+    @Override
+    public void deleteAllByShoppingCartId(Long cartId) {
+        cartItemRepository.deleteAllByShoppingCartId(cartId);
     }
 }

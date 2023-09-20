@@ -5,6 +5,8 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Arrays;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -17,8 +19,14 @@ import org.springframework.web.filter.OncePerRequestFilter;
 @Component
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
     private static final String BEARER_TOKEN = "Bearer ";
+    private static final String[] WHITE_LIST = { 
+            "/auth/", 
+            "/v3/api-docs", 
+            "/swagger-ui/" };
     private final JwtUtil jwtUtil;
     private final UserDetailsService userDetailsService;
+    @Value("${server.servlet.context-path}")
+    private String contextPath;
     
     public JwtAuthenticationFilter(JwtUtil jwtUtil, UserDetailsService userDetailsService) {
         this.jwtUtil = jwtUtil;
@@ -47,9 +55,10 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         }
         return null;
     }
-    
+
     @Override
     protected boolean shouldNotFilter(HttpServletRequest request) throws ServletException {
-        return request.getRequestURI().startsWith("/api/auth/");
+        return Arrays.stream(WHITE_LIST)
+                .anyMatch(url -> request.getRequestURI().startsWith(contextPath.concat(url)));
     }
 }

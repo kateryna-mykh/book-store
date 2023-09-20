@@ -14,4 +14,6 @@ public interface ShoppingCartService {
     ShoppingCartDto deleteBookFromCart(Long cartItemId);
 
     void deleteById(Long id);
+    
+    void clear();
 }

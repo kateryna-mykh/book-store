@@ -61,7 +61,7 @@ public class CategoryController {
     @PutMapping("/{id}")
     @Operation(summary = "Update a category", description = "Update a category")
     public CategoryDto updateCategory(@PathVariable Long id,
-            @RequestBody CreateCategoryDto categoryDto) {
+            @RequestBody @Valid CreateCategoryDto categoryDto) {
         return categoryService.update(id, categoryDto);
     }
     

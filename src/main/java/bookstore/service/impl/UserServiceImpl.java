@@ -1,5 +1,6 @@
 package bookstore.service.impl;
 
+import bookstore.dto.OrderAddressDto;
 import bookstore.dto.UserRegistrationRequestDto;
 import bookstore.dto.UserResponseDto;
 import bookstore.exception.EntityNotFoundException;
@@ -29,6 +30,7 @@ public class UserServiceImpl implements UserService {
     private final UserMapper userMapper;
     @Value("${credential.admin}")
     private String adminEmail;
+    private Authentication authentication;
 
     public UserServiceImpl(UserRepository userRepository, PasswordEncoder passwordEncoder,
             UserMapper userMapper, RoleService roleService,
@@ -62,12 +64,25 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public ShoppingCart getUserCart() {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        User currUser = userRepository.findByEmail(authentication.getName())
+        Long userId = getUser().getId();
+        return shoppingCartRepository.findById(userId)
+                .orElseThrow(() -> new EntityNotFoundException(
+                        "Can't find shopping cart by id: " + userId));
+    }
+    
+    @Override
+    public User getUser() {
+        authentication = SecurityContextHolder.getContext()
+                .getAuthentication();
+        return userRepository.findByEmail(authentication.getName())
                 .orElseThrow(() -> new EntityNotFoundException(
                         "Can't find user by email: " + authentication.getName()));
-        return shoppingCartRepository.findById(currUser.getId())
-                .orElseThrow(() -> new EntityNotFoundException(
-                        "Can't find shopping cart by id: " + currUser.getId()));
+    }
+    
+    @Override
+    public void updateShippingAddress(OrderAddressDto shippingAddress) {
+        User user = getUser();
+        user.setShippingAddress(shippingAddress.shippingAddress());
+        userRepository.save(user);
     }
 }

@@ -37,8 +37,10 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http.cors(AbstractHttpConfigurer::disable).csrf(AbstractHttpConfigurer::disable)
-                .authorizeHttpRequests(
-                        auth -> auth.requestMatchers("/auth/**")
+                .authorizeHttpRequests(auth -> auth
+                        .requestMatchers("/auth/**", 
+                                "/v3/api-docs/**", 
+                                "/swagger-ui/**")
                         .permitAll()
                         .anyRequest()
                         .authenticated())
@@ -49,7 +51,7 @@ public class SecurityConfig {
                 .userDetailsService(userDetailsService)
                 .build();
     }
-
+    
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration configuration)
             throws Exception {
