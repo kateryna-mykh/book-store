@@ -12,5 +12,6 @@ public interface CategoryMapper {
     CategoryDto toDto(Category category);
 
     @Mapping(target = "id", ignore = true)
+    @Mapping(target = "isDeleted", ignore = true)
     Category toModel(CreateCategoryDto categoryDto);
 }
