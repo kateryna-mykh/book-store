@@ -6,6 +6,7 @@ import bookstore.service.BookService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.Positive;
 import java.util.List;
 import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.data.domain.Pageable;
@@ -56,7 +57,8 @@ public class BookController {
     @PreAuthorize("hasAuthority('ADMIN')")
     @PutMapping("/{id}")
     @Operation(summary = "Update a book", description = "Update a book")
-    public BookDto update(@PathVariable Long id, @RequestBody @Valid CreateBookRequestDto book) {
+    public BookDto update(@PathVariable @Positive Long id, @RequestBody @Valid 
+            CreateBookRequestDto book) {
         return bookService.update(id, book);
     }
 
