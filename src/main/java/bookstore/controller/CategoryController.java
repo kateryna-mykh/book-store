@@ -8,6 +8,7 @@ import bookstore.service.CategoryService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.Positive;
 import java.util.List;
 import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.data.domain.Pageable;
@@ -60,7 +61,7 @@ public class CategoryController {
     @PreAuthorize("hasAuthority('ADMIN')")
     @PutMapping("/{id}")
     @Operation(summary = "Update a category", description = "Update a category")
-    public CategoryDto updateCategory(@PathVariable Long id,
+    public CategoryDto updateCategory(@PathVariable @Positive Long id,
             @RequestBody @Valid CreateCategoryDto categoryDto) {
         return categoryService.update(id, categoryDto);
     }

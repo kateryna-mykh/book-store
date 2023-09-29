@@ -51,6 +51,8 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public BookDto update(Long id, CreateBookRequestDto productDto) {
+        bookRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Can't find book by id: " + id));
         List<Category> categories = categoryRepository.findAllById(productDto.getCategoryIds());
         Book book = bookMapper.toModel(productDto);
         book.setId(id);
