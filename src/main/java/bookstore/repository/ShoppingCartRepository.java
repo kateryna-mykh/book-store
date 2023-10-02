@@ -10,6 +10,6 @@ import org.springframework.stereotype.Repository;
 public interface ShoppingCartRepository extends JpaRepository<ShoppingCart, Long> {
     @Override
     @Query(value = "SELECT DISTINCT sc FROM ShoppingCart sc LEFT JOIN FETCH sc.cartItems ci "
-            + "LEFT JOIN FETCH ci.book where ci.shoppingCart.id = ?1")
+            + "LEFT JOIN FETCH ci.book where sc.user.id = ?1")
     Optional<ShoppingCart> findById(Long id);
 }

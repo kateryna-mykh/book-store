@@ -1,0 +1,1 @@
+delete from cart_items where id = 3 and book_id = 3;

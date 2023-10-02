@@ -125,7 +125,7 @@ class CategoryControllerTest {
     }
     
     @Test
-    @Sql(scripts = "classpath:/database/categories/reset-category-byID-1.sql",
+    @Sql(scripts = "classpath:database/categories/reset-category-byID-1.sql",
             executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
     @WithMockUser(username = "admin", authorities = { "ADMIN" })
     @DisplayName("Update a category, return updated CategoryDto")
@@ -146,7 +146,7 @@ class CategoryControllerTest {
     }
     
     @Test
-    @Sql(scripts = "classpath:/database/categories/reset-category-byID-1.sql", 
+    @Sql(scripts = "classpath:database/categories/reset-category-byID-1.sql", 
             executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
     @WithMockUser(username = "admin", authorities = { "ADMIN" })
     @DisplayName("Verify delete() method works")
@@ -178,9 +178,9 @@ class CategoryControllerTest {
     }
     
     @Test
-    @Sql(scripts = "classpath:/database/books/insert-books-join-to-categories.sql", 
+    @Sql(scripts = "classpath:database/books/insert-books-join-to-categories.sql", 
             executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
-    @Sql(scripts = "classpath:/database/books/delete-all-books-join-to-categories.sql", 
+    @Sql(scripts = "classpath:database/books/delete-all-books-join-to-categories.sql", 
             executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
     @WithMockUser(username = "user", authorities = { "USER" })
     @DisplayName("Get books by category id, return List<BookDtoWithoutCategoryIds> with 1 object")
