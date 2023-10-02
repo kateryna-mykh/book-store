@@ -25,7 +25,6 @@ import java.util.Optional;
 import java.util.Set;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -83,10 +82,6 @@ class BookServiceImplTest {
         bookDto.setPrice(book.getPrice());
         bookDto.setCoverImage(book.getCoverImage());
         bookDto.setCategoryIds(List.of(id));
-    }
-
-    @BeforeEach
-    void setUp() {
     }
 
     @Test

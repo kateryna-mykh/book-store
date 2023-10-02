@@ -158,7 +158,7 @@ class BookControllerTest {
     }
     
     @Test
-    @Sql(scripts = "classpath:/database/books/reset-upadated-book.sql",
+    @Sql(scripts = "classpath:database/books/reset-upadated-book.sql",
             executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
     @WithMockUser(username = "admin", authorities = { "ADMIN" })
     @DisplayName("Update a book, return updated BookDto")
@@ -180,7 +180,7 @@ class BookControllerTest {
     }
     
     @Test
-    @Sql(scripts = "classpath:/database/books/reset-upadated-book.sql", 
+    @Sql(scripts = "classpath:database/books/reset-upadated-book.sql", 
             executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
     @WithMockUser(username = "admin", authorities = { "ADMIN" })
     @DisplayName("Verify delete() method works")
