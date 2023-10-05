@@ -5,10 +5,10 @@ There is implemented JWT bearer authentication. Authorization is provided with R
 The project follows REST principles implemented with HTTP methods. 
 
 **Functionality:**  
-Below a list of all endpoints in the app. Admin has both roles, so also has access to user endpoints.
+Below is a list of all endpoints in the app. Admin has both roles, so also has access to user endpoints.
 
 Available for unauthorized users:  
-- POST: /api/auth/register (Regiister a new user)
+- POST: /api/auth/register (Register a new user)
 - POST: /api/auth/login (Login an existing user)
 
 Available for USER:  
@@ -58,4 +58,4 @@ docker-compose up
 
 7. Use Postman or Swagger for sending requests. ([Link for Postman](http://localhost:8081/api/auth/register), [Link for Swagger](http://localhost:8081/api/swagger-ui/index.html))  
 for user access -> just register then login  
-for admin access -> use or change credential option in `application.properties` file
+for admin access -> use or change the credential option in `application.properties` file
