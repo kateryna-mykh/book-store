@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class OrderItemServiceImpl implements OrderItemService {
@@ -38,6 +39,7 @@ public class OrderItemServiceImpl implements OrderItemService {
                 () -> new EntityNotFoundException("Can't get order item by id " + itemId)));
     }
     
+    @Transactional
     @Override
     public Set<OrderItem> saveAll(ShoppingCart shoppingCart, Order order) {
         Set<CartItem> cartItems = shoppingCart.getCartItems();

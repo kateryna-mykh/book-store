@@ -20,6 +20,7 @@ import java.util.List;
 import java.util.Set;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class OrderServiceImpl implements OrderService {
@@ -45,7 +46,8 @@ public class OrderServiceImpl implements OrderService {
                 .map(orderMapper::toDto)
                 .toList();
     }
-
+    
+    @Transactional
     @Override
     public OrderDto save(OrderAddressDto shippingAddress) {
         ShoppingCart shoppingCart = userService.getUserCart();
