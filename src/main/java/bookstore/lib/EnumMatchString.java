@@ -1,4 +1,4 @@
-package lib;
+package bookstore.lib;
 
 import jakarta.validation.Constraint;
 import jakarta.validation.Payload;

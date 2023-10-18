@@ -1,8 +1,8 @@
 package bookstore.dto;
 
+import bookstore.lib.FieldsMatch;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
-import lib.FieldsMatch;
 import lombok.Getter;
 
 @FieldsMatch(
